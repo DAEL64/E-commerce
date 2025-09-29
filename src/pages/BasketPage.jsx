@@ -6,13 +6,21 @@ export default function BasketPage() {
   const cartItems = useCartStore((state) => state.cartItems);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const clearCart = useCartStore((state) => state.clearCart)
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleDecreaseQuantity = (item) => {
+    handleQuantityChange(item.id, item.quantity - 1);
+  };
+
+  const handleIncreaseQuantity = (item) => {
+    handleQuantityChange(item.id, item.quantity + 1);
+  };
 
   const handleQuantityChange = (id, newQuantity) => {
     if (newQuantity <= 0) {
@@ -23,13 +31,15 @@ export default function BasketPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-4xl">
+    <div className="min-h-screen  bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="container mx-auto px-4  lg:px-8 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <ShoppingBag className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">კალათა</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+              კალათა
+            </h1>
           </div>
           {cartItems.length > 0 && (
             <p className="text-gray-600">
@@ -52,8 +62,9 @@ export default function BasketPage() {
                 დაამატეთ თქვენი საყვარელი ნივთები მთავარი გვერდიდან
               </p>
               <Link
-              to='/'
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                to="/"
+                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
                 ნივთების მოძიება
               </Link>
             </div>
@@ -61,102 +72,116 @@ export default function BasketPage() {
         ) : (
           <>
             {/* Cart Items */}
-            <div className="space-y-4 mb-8">
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 hover:shadow-md transition-all duration-300"
-                >
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    {/* Product Image */}
-                    <div className="flex-shrink-0 mx-auto sm:mx-0">
-                      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-gray-50 border border-gray-200">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Product Info */}
-                    <div className="flex-grow text-center sm:text-left">
-                      <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                        <p className="text-2xl font-bold text-indigo-600">
-                          {item.price} <span className="text-lg text-gray-500">₾</span>
-                        </p>
-                        
-                        {/* Quantity Controls */}
-                        <div className="flex items-center justify-center sm:justify-start gap-3">
-                          <button
-                            onClick={() => handleDecreaseQuantity(item)}
-                            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
-                          >
-                            <Minus className="w-4 h-4 text-gray-600" />
-                          </button>
-                          <span className="w-8 text-center font-semibold text-gray-900">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => handleIncreaseQuantity(item)}
-                            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
-                          >
-                            <Plus className="w-4 h-4 text-gray-600" />
-                          </button>
+            <div className="flex gap-5 justify-between">
+              <div className="space-y-4 ">
+                {cartItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bg-gray-100 rounded-2xl h-27 shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="flex w-full gap-4 justify-center">
+                      {/* Product Image */}
+                      <div className="flex-shrink-0 mx-auto sm:mx-0">
+                        <div className="w-24 h-24  rounded-xl overflow-hidden ">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-[60%] object-cover hover:scale-110 transition-transform duration-300"
+                          />
                         </div>
                       </div>
-                      
-                      {item.quantity > 1 && (
-                        <p className="text-sm text-gray-500 mt-2">
-                          სულ: {(item.price * item.quantity).toFixed(2)} ₾
-                        </p>
-                      )}
-                    </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-col gap-3 items-center">
-                      <button
-                        className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                      >
-                        შეძენა
-                      </button>
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="w-10 h-10 rounded-full bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 flex items-center justify-center transition-all duration-200 group"
-                        title="კალათიდან ამოშლა"
-                      >
-                        <Trash2 className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-                      </button>
+                      {/* Product Info */}
+                      <div className="flex-grow text-center sm:text-left">
+                        <h3 className="font-semibold text-sm text-gray-900 mb-2 line-clamp-2">
+                          {item.title}
+                        </h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                          <p className="text-xl font-bold text-indigo-600">
+                            {item.price}{" "}
+                            <span className="text-sm text-gray-500">₾</span>
+                          </p>
+
+                          {/* Quantity Controls */}
+                          <div className="flex items-center justify-center sm:justify-start gap-3">
+                            <button
+                              onClick={() => handleDecreaseQuantity(item)}
+                              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                            >
+                              <Minus className="w-4 h-4 text-gray-600" />
+                            </button>
+                            <span className="w-8 text-center font-semibold text-gray-900">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => handleIncreaseQuantity(item)}
+                              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition-colors duration-200"
+                            >
+                              <Plus className="w-4 h-4 text-gray-600" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {item.quantity > 1 && (
+                          <p className="text-sm text-gray-500 mt-2">
+                            სულ: {(item.price * item.quantity).toFixed(2)} ₾
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-3 items-center">
+                        <button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                          შეძენა
+                        </button>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="w-10 h-10 rounded-full bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 flex items-center justify-center transition-all duration-200 group"
+                          title="კალათიდან ამოშლა"
+                        >
+                          <Trash2 className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Summary Card */}
-            <div className="bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-2xl p-6 shadow-xl">
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div className="text-center sm:text-left">
-                  <p className="text-indigo-100 mb-1">სულ ღირებულება</p>
-                  <p className="text-3xl font-bold">{totalPrice.toFixed(2)} ₾</p>
-                  <p className="text-indigo-200 text-sm">{totalItems} ნივთი</p>
-                </div>
-                <button className="w-full sm:w-auto bg-white text-indigo-700 px-8 py-4 rounded-xl font-bold hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  ყველას შეძენა
-                </button>
+                ))}
               </div>
-              
-              {/* Clear Cart Button */}
-              <div className="mt-4 pt-4 border-t border-indigo-300/30">
-                <button 
-                  onClick={clearCart}
-                  className="w-full sm:w-auto text-indigo-200 hover:text-white text-sm font-medium underline hover:no-underline transition-all duration-200"
-                >
-                  კალათის გასუფთავება
-                </button>
+
+              {/* Summary Card */}
+              <div className="flex flex-col  justify-between w-120 max-h-74">
+                <div className="h-full bg-gray-100 text-gray-700 roundedt--2xl shadow-xl">
+                  <div className="">
+                    <div className="text-center px-6 border-b-1 py-4 border-gray-300 my-4 pt-5 sm:text-left flex gap-3 items-center justify-between">
+                      <p className="font-medium">სულ ღირებულება</p>
+                      <p className="text-lg text-gray-700 font-bold">
+                        {totalPrice.toFixed(2)} ₾
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center px-6 justify-between">
+                    <p className="font-medium">ნივთების რაოდენობა</p>
+                    <p className="text-lg text-gray-700 font-bold">{totalItems} ნივთი</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div className="p-3 flex justify-center w-full bg-gray-100 shadow-xl rounded-b-2xl">
+                    <button className="w-full sm:w-auto bg-gradient-to-br hover:from-indigo-600 hover:to-indigo-700 from-indigo-600 to-purple-700 text-gray-100 hover:text-gray-200 px-8 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                      ყველას შეძენა
+                    </button>
+                  </div>
+                </div>
+
+                {/* Clear Cart Button */}
+                <div className="flex justify-center w-full">
+                  <div className="mt-4 py-2 border-t rounded-lg items-center hover:text-gray-300 hover:scale-105 transition-transform duration-300 border-indigo-300/30 w-[80%] flex justify-center bg-gradient-to-br hover:from-indigo-700 hover:to-indigo-800 from-indigo-600 to-purple-700 text-white">
+                    <button
+                      onClick={clearCart}
+                      className="sm:w-auto text-gray-200 text-sm font-medium transition-all duration-200"
+                    >
+                      კალათის გასუფთავება
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </>
