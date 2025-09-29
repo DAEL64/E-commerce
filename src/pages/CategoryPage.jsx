@@ -34,9 +34,9 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (`/categories/:${id}`) {
-        setSelectedCategory(id)
+      setSelectedCategory(id);
     } else {
-        setSelectedCategory(all)
+      setSelectedCategory(all);
     }
   }, [id]);
 
@@ -413,80 +413,82 @@ export default function CategoryPage() {
                 {viewMode === "grid" ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {categoryProducts.map((product, index) => (
-                      <div
-                        key={product.id}
-                        className="group bg-white rounded-3xl p-6 border border-gray-100 hover:border-indigo-200 hover:shadow-xl transition-all duration-500 cursor-pointer relative overflow-hidden"
-                        style={{
-                          animationDelay: `${index * 0.1}s`,
-                        }}
-                      >
-                        {/* Favorite Button */}
-                        <button
-                          onClick={() => toggleFavorite(product.id)}
-                          className="absolute top-4 right-4 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300"
+                      <button onClick={() => navigate(`/item/${product.id}`)}>
+                        <div
+                          key={product.id}
+                          className="group bg-white rounded-3xl p-6 border border-gray-100 hover:border-indigo-200 hover:shadow-xl transition-all duration-500 cursor-pointer relative overflow-hidden"
+                          style={{
+                            animationDelay: `${index * 0.1}s`,
+                          }}
                         >
-                          <Heart
-                            className={`w-4 h-4 ${
-                              favorites.has(product.id)
-                                ? "text-red-500 fill-current"
-                                : "text-gray-400"
-                            }`}
-                          />
-                        </button>
+                          {/* Favorite Button */}
+                          <button
+                            onClick={() => toggleFavorite(product.id)}
+                            className="absolute top-4 right-4 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-300"
+                          >
+                            <Heart
+                              className={`w-4 h-4 ${
+                                favorites.has(product.id)
+                                  ? "text-red-500 fill-current"
+                                  : "text-gray-400"
+                              }`}
+                            />
+                          </button>
 
-                        <div className="aspect-square bg-gray-50 rounded-2xl mb-4 overflow-hidden relative">
-                          <img
-                            src={product.image}
-                            alt={product.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                          />
+                          <div className="aspect-square bg-gray-50 rounded-2xl mb-4 overflow-hidden relative">
+                            <img
+                              src={product.image}
+                              alt={product.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            />
 
-                          {/* Quick View Overlay */}
-                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button className="bg-white/90 backdrop-blur-sm text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-white transition-all duration-300 flex items-center gap-2">
-                              <Eye className="w-4 h-4" />
-                              სწრაფი ნახვა
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="space-y-3">
-                          <h3 className="font-semibold text-gray-800 text-lg line-clamp-2 group-hover:text-indigo-600 transition-colors duration-300 leading-tight">
-                            {product.title}
-                          </h3>
-
-                          <div className="flex items-center gap-2">
-                            <div className="flex items-center gap-1">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-4 h-4 ${
-                                    i < Math.floor(product.rating?.rate || 4)
-                                      ? "text-yellow-500 fill-current"
-                                      : "text-gray-300"
-                                  }`}
-                                />
-                              ))}
+                            {/* Quick View Overlay */}
+                            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <button className="bg-white/90 backdrop-blur-sm text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-white transition-all duration-300 flex items-center gap-2">
+                                <Eye className="w-4 h-4" />
+                                სწრაფი ნახვა
+                              </button>
                             </div>
-                            <span className="text-sm text-gray-500">
-                              ({product.rating?.count || 128} მიმოხილვა)
-                            </span>
                           </div>
 
-                          <div className="flex items-center justify-between pt-2">
-                            <span className="font-bold text-2xl text-indigo-600">
-                              ${product.price}
-                            </span>
-                            <button
-                              id={`cart-btn-${product.id}`}
-                              onClick={() => handleAddToCart(product)}
-                              className="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl transition-all duration-300 group-hover:scale-110 hover:shadow-lg"
-                            >
-                              <ShoppingCart className="w-5 h-5" />
-                            </button>
+                          <div className="space-y-3">
+                            <h3 className="font-semibold text-gray-800 text-lg line-clamp-2 group-hover:text-indigo-600 transition-colors duration-300 leading-tight">
+                              {product.title}
+                            </h3>
+
+                            <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`w-4 h-4 ${
+                                      i < Math.floor(product.rating?.rate || 4)
+                                        ? "text-yellow-500 fill-current"
+                                        : "text-gray-300"
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                              <span className="text-sm text-gray-500">
+                                ({product.rating?.count || 128} მიმოხილვა)
+                              </span>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-2">
+                              <span className="font-bold text-2xl text-indigo-600">
+                                ${product.price}
+                              </span>
+                              <button
+                                id={`cart-btn-${product.id}`}
+                                onClick={() => handleAddToCart(product)}
+                                className="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl transition-all duration-300 group-hover:scale-110 hover:shadow-lg"
+                              >
+                                <ShoppingCart className="w-5 h-5" />
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 ) : (

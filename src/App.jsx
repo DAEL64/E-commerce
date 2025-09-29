@@ -25,10 +25,13 @@ function App() {
           <h3>სულსწრაფი შეთავაზებები</h3>
         </div>
         <div className="w-[70%]">
-          <MySwiper data={data} />
+          <MySwiper data={data}/>
         </div>
         <div className="w-[70%] flex justify-center  py-10 overflow-hidden">
-          <img src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2Ff53b46f7-48e5-4545-9688-315dbc5c1d3f.jpeg&w=1200&q=100" className="w-full rounded-xl"></img>
+          <img
+            src="https://zoommer.ge/_next/image?url=https%3A%2F%2Fs3.zoommer.ge%2Fsite%2Ff53b46f7-48e5-4545-9688-315dbc5c1d3f.jpeg&w=1200&q=100"
+            className="w-full rounded-xl"
+          ></img>
         </div>
         <div className="w-[70%] py-10">
           <MySwiper data={data} />

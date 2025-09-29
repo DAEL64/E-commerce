@@ -3,14 +3,7 @@ import flag from "../assets/flag.png";
 import mainLogo from "../assets/customLogo.png";
 import { useCartHook } from "../hooks/useCartHook";
 import { useCartStore } from "../stores/useCartStore";
-import {
-  X,
-  Search,
-  ShoppingBag,
-  User,
-  Phone,
-  Menu,
-} from "lucide-react";
+import { X, Search, ShoppingBag, User, Phone, Menu } from "lucide-react";
 
 export default function Header() {
   const { onOpen, onClose, isOpen } = useCartHook();
@@ -214,7 +207,7 @@ export default function Header() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes dropDown {
           0% {
             opacity: 0;

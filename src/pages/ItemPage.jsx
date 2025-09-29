@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useProductStore } from "../store/useProductStore";
+import { useProductStore } from "../stores/useProductStore";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Star, ShoppingCart, Share2, Shield, Truck, RotateCcw } from "lucide-react";
-import { useCartStore } from "../store/useCartStore";
+import { useCartStore } from "../stores/useCartStore";
 
 export default function ItemPage() {
   const { fetchPosts, data, loading, error } = useProductStore();

@@ -35,9 +35,9 @@ export default function BasketPage() {
       <div className="container mx-auto px-4  lg:px-8 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-end gap-3 mb-2">
             <ShoppingBag className="w-8 h-8 text-indigo-600" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
               კალათა
             </h1>
           </div>
@@ -158,12 +158,12 @@ export default function BasketPage() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center px-6 justify-between">
+                  <div className="flex items-center px-6 mb-4 justify-between">
                     <p className="font-medium">ნივთების რაოდენობა</p>
                     <p className="text-lg text-gray-700 font-bold">{totalItems} ნივთი</p>
                   </div>
                 </div>
-                <div className="mt-4">
+                <div className="mt-2">
                   <div className="p-3 flex justify-center w-full bg-gray-100 shadow-xl rounded-b-2xl">
                     <button className="w-full sm:w-auto bg-gradient-to-br hover:from-indigo-600 hover:to-indigo-700 from-indigo-600 to-purple-700 text-gray-100 hover:text-gray-200 px-8 py-3 rounded-xl font-bold hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
                       ყველას შეძენა
