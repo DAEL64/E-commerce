@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import flag from "../assets/flag.png";
+import "../styles/header.css"
 import mainLogo from "../assets/customLogo.png";
 import { useCartHook } from "../hooks/useCartHook";
 import { useCartStore } from "../stores/useCartStore";
@@ -115,7 +116,7 @@ export default function Header() {
 
                 {isOpen && (
                   <div
-                    className="absolute top-16 right-0 bg-white rounded-2xl shadow-2xl border border-gray-200 min-w-[400px] max-w-[500px] z-50 overflow-hidden animate-dropDown"
+                    className="absolute top-14 right-0 bg-white rounded-2xl shadow-2xl min-w-[400px] max-w-[500px] z-50 overflow-hidden animate-dropDown"
                     onMouseEnter={onOpen}
                     onMouseLeave={onClose}
                   >
@@ -206,30 +207,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes dropDown {
-          0% {
-            opacity: 0;
-            transform: translateY(-10px) scale(0.95);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        .animate-dropDown {
-          animation: dropDown 0.3s ease-out forwards;
-        }
-
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
     </>
   );
 }

@@ -38,7 +38,7 @@ export default function Slider({className}) {
 
   return (
     <>
-      <div className="w-[85%] py-3.5 flex px-3 relative overflow-hidden">
+      <div className="w-[85%] md:hidden lg:flex py-3.5 px-3 relative overflow-hidden">
         <div className="relative w-full">
           <img 
             src={pics[index]} 
@@ -51,7 +51,7 @@ export default function Slider({className}) {
         
         <button 
           onClick={nextPic} 
-          className="cursor-pointer absolute right-6 top-[45%] transition-all duration-200 hover:scale-110 hover:opacity-80 active:scale-95 bg-main-color p-2 rounded-full z-10"
+          className="cursor-pointer absolute right-6 top-[45%] hover:bg-indigo-600 transition-all duration-200 hover:scale-110 hover:opacity-80 active:scale-95 bg-main-color p-2 rounded-full z-10"
           disabled={isTransitioning}
         >
           {/* <img src={sliderRight} alt="" /> */} <ArrowRight className=" text-white" />
@@ -59,7 +59,7 @@ export default function Slider({className}) {
         
         <button 
           onClick={prevPic} 
-          className="cursor-pointer absolute top-[45%] left-6 transition-all duration-200 hover:scale-110 hover:opacity-80 active:scale-95 bg-main-color p-2 rounded-full"
+          className="cursor-pointer absolute top-[45%] left-6 transition-all hover:bg-indigo-600 duration-200 hover:scale-110 hover:opacity-80 active:scale-95 bg-main-color p-2 rounded-full"
           disabled={isTransitioning}
         >
           {/* <img src={sliderLeft} alt="" /> */} <ArrowLeft className=" text-white" />

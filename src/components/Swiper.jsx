@@ -39,7 +39,7 @@ export default function MySwiper({ data }) {
                 </div>
                 <div className="h-1/2 flex flex-col">
                   <div className="text-sm w-1/2 py-4">
-                    <p className="bg-gradient-to-br from-indigo-600 to-indigo-700 text-white px-1 py-3 rounded-[18px]">
+                    <p className="bg-gradient-to-br md:line-clamp-1 md:py-1 lg:line-clamp-0 lg:py-2 from-indigo-600 to-indigo-700 text-white px-1 rounded-[18px]">
                       {product.category}
                     </p>
                   </div>
@@ -59,7 +59,7 @@ export default function MySwiper({ data }) {
                       </span>
                     </div>
                   </div>
-                  <div className="text-[0.8rem] flex justify-start items-start h-10">
+                  <div className="text-[0.8rem] flex justify-start line-clamp-2 items-start h-10">
                     <span className="w-full text-left line-clamp-2">
                       {product.title}
                     </span>
