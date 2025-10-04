@@ -68,7 +68,7 @@ export default function MySwiper({ data }) {
               </button>
               <div className="flex py-3 gap-1 w-full">
                 <button
-                  className="w-full bg-indigo-600 rounded-xl p-2 text-white font-medium cursor-pointer hover:scale-105 hover:bg-indigo-600 transition-transform duration-200"
+                  className="w-full bg-indigo-600 rounded-xl p-2 text-white font-medium cursor-pointer hover:bg-indigo-700 transition-transform duration-200"
                   onClick={() => addToCart(product)}
                 >
                   Add to cart

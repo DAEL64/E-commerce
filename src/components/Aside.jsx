@@ -1,121 +1,66 @@
-import { useEffect } from "react";
-import gadgets from "../assets/gadgets.svg";
-import laptop from "../assets/laptop.svg";
-import camera from "../assets/camera.svg";
-import mobile from "../assets/mobile.svg";
-import audio from "../assets/audio.svg";
-import gamepad from "../assets/gaming.svg";
-import "../styles/aside.css"
-import tv from "../assets/TV.svg";
-import tablet from "../assets/tablet.svg";
-import { useMenuHook } from "../hooks/useMenuHook.js";
+import { useEffect, useState } from "react";
+import "../styles/aside.css";
+import { asideRoutes } from "./asideLinks.js";
 import { useProductStore } from "../stores/useProductStore.js";
 import { Link, useParams } from "react-router-dom";
 
-
 export default function aside() {
-  const { onOpen, onClose, isOpen } = useMenuHook();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { fetchPosts, data, loading, error } = useProductStore();
 
-  const { id } = useParams();
-
   const categories = [...new Set(data.map((product) => product.category))];
+
+  const titles = [...new Set(data.map((product) => product.title))];
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
   return (
-    <div className="w-[22%] md:hidden lg:block py-3.5">
-      <ul className="shadow-xl px-1 py-3 flex flex-col gap-3 rounded-[20px] h-[100%] relative w-full">
-        <Link
-          to="/categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={mobile} alt="" className="w-[20px]" />
-          მობილურები
-        </Link>
-        <Link
-          to="/categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={tablet} alt="" className="w-[20px]" />
-          ტაბები
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={laptop} alt="" className="w-[20px]" />
-          ლეპტოპები | IT
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={gadgets} alt="" className="w-[20px]" />
-          სმარტ გაჯეტები
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={audio} alt="" className="w-[20px]" />
-          აუდიო სისტემა
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={gamepad} alt="" className="w-[20px]" />
-          Gaming
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-b p-[4.5px] pb-2 w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={tv} alt="" className="w-[20px]" />
-          TV | მონიტორები
-        </Link>
-        <Link
-          to="categories/:id"
-          className="border-gray-300 px-[4.5px] py-[3px] flex gap-2 text-[12px] font-medium text-gray-400 cursor-pointer hover:bg-gray-100"
-          onMouseEnter={onOpen}
-          onMouseLeave={onClose}
-        >
-          <img src={camera} alt="" className="w-[20px]" />
-          ფოტო | ვიდეო
-        </Link>
+    <div className="w-1/5 md:hidden lg:block rounded-xl border-1 hover:rounded-none transition-all duration-300 ease-in-out border-gray-500/10">
+      <ul className="shadow-xl rounded-xl hover:rounded-none transition-all duration-300 ease-in-out flex flex-col h-full relative w-full">
+        {asideRoutes.map((route) => (
+          <div className="w-full flex justify-center items-center flex-col h-full">
+            <Link
+              to={route.to}
+              className="px-2.5 h-full items-center w-full border-gray-200 flex gap-2 text-[12px] font-[600] text-gray-400  cursor-pointer hover:bg-gray-100"
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+            >
+              <img src={route.img} alt={route.title} className="w-5" />
+              <span>{route.title}</span>
+            </Link>
+            <div className="w-14/15 border-b-1 border-gray-500/20"></div>
+          </div>
+        ))}
         {isOpen && (
           <div
-            className="transition-all duration-300 ease-out top-3 left-70 absolute shadow-3xl z-50 bg-white rounded-r-[15px] rounded-b-[15px] min-w-[900px] flex flex-col transform-gpu animate-gentleFadeIn"
-            onMouseEnter={onOpen}
-            onMouseLeave={onClose}
+            className="transition-all min-h-full justify-around max-h-6/5 overflow-scroll border-gray-500/10 shadow-md duration-300 ease-out top-0 left-full absolute shadow-3xl z-30 bg-white rounded-r-xl min-w-svh flex animate-gentleFadeIn"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
             style={{
-              animation: "gentleFadeIn 0.3s ease-out forwards",
+              animation: "gentleFadeIn 0.1s ease-out forwards",
             }}
           >
             {categories.map((category) => {
               return (
                 <div
-                  key={category}
-                  className="bg-red-500 w-full z-0 animate-gentleFadeIn animate-subtleAppear justify-between p-2">
-                  <div>{category}</div>
+                  key={category.id}
+                  className="w-full z-0 animate-gentleFadeIn animate-subtleAppear p-2"
+                >
+                  <span className="text-lg font-medium">{category}</span>
+                  <span>
+                    {data
+                      .filter((product) => product.category === category)
+                      .map((product) => {
+                        return (
+                          <div className="text-sm flex gap-3 w-full h-full" key={product.id}>
+                            {product.title}
+                          </div>
+                        );
+                      })}
+                  </span>
                 </div>
               );
             })}

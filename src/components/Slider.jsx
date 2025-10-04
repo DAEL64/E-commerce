@@ -8,7 +8,7 @@ import picFive from "../assets/zoomerSliderPic5.webp";
 import picSix from "../assets/zoomerSliderPic6.webp";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function Slider({className}) {
+export default function Slider() {
   const pics = [picOne, picTwo, picThree, picFour, picFive, picSix];
 
   const [index, setIndex] = useState(0);
@@ -38,13 +38,16 @@ export default function Slider({className}) {
 
   return (
     <>
-      <div className="w-[85%] md:hidden lg:flex py-3.5 px-3 relative overflow-hidden">
+    {pics.map((pic) => {
+      
+    })}
+      <div className="flex-1 md:hidden lg:flex relative overflow-hidden">
         <div className="relative w-full">
           <img 
             src={pics[index]} 
             alt="" 
             className={`rounded-2xl w-full transition-all duration-300 ease-in-out transform ${
-              isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+              isTransitioning ? 'scale-95' : 'scale-100'
             }`}
           />
         </div>
@@ -80,7 +83,7 @@ export default function Slider({className}) {
               }}
               className={`w-2 h-2 rounded-full transition-all duration-300 hover:scale-125 xl:block sm:hidden ${
                 i === index 
-                  ? 'bg-white scale-110 shadow-lg' 
+                  ? 'bg-white scale-110 shadow-lg w-5' 
                   : 'bg-white/40 hover:bg-white/60'
               }`}
             />

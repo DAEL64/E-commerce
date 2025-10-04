@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <div className="w-[100%] mx-auto flex flex-col items-center">
-        <div className="w-[70%] flex justify-center gap-5">
+        <div className="w-[70%] mt-5 flex justify-center gap-5">
           <Aside /> <Slider />
         </div>
         <div className="flex font-extrabold w-[70%] py-10">

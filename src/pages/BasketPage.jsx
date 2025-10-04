@@ -77,7 +77,7 @@ export default function BasketPage() {
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-gray-100 rounded-2xl h-27 shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all duration-300"
+                    className="bg-gray-100 rounded-2xl min-h-27 shadow-sm border border-gray-100 p-3 hover:shadow-md transition-all duration-300"
                   >
                     <div className="flex w-full gap-4 justify-center">
                       {/* Product Image */}
